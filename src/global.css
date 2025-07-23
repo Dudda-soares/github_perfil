@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+:root{
+    --corPrincipal: rgba(255, 145, 0, 0.911);
+    --corSecundaria: #111;
+}
