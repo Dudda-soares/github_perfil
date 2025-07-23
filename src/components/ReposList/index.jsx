@@ -5,15 +5,23 @@ import { use } from "react";
 const ReposList = ({nomeUsuario }) => {
     const [repos, setRepos] = useState([]);
     const [estaCarregando, setEstaCarregando] = useState(true);
+    const [deuErro, setDeuErro] = useState(false);
 
     useEffect(() => {
         setEstaCarregando(true);
+        setDeuErro(false);
         // useEffect é um hook que permite executar efeitos colaterais em componentes funcionais
         // Neste caso, ele está buscando dados de uma API e atualizando o estado do componente  
+        
         fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
             // fetch é uma função que faz uma requisição HTTP para a URL especificada
             // e retorna uma Promise que resolve com a resposta da requisição
-            .then(response => response.json())
+            .then(response =>{
+                if(!response.ok){
+                    throw new Error("Erro ao buscar repositórios");
+                }
+                return response.json()
+            })
             // response.json() converte a resposta da requisição em um objeto JSON
             // e retorna uma Promise que resolve com o objeto JSON
             .then(resJson => {
@@ -25,10 +33,27 @@ const ReposList = ({nomeUsuario }) => {
                 },1000)
                 
             })
+            
+            .catch(error => {
+                console.error("erro ao buscar repositorio confirme o nome do usuario", error)
+                setDeuErro(true);
+                // setDeuErro atualiza o estado do componente para indicar que houve um erro ao
+                // buscar os dados da API
+                setEstaCarregando(false);
+            })
     },[nomeUsuario])
+    
+    useEffect(() => {
+                if(deuErro){
+                    alert("Erro ao buscar repositórios. Verifique o nome do usuário.");
+                }
+            }, [deuErro]);
+    
     return(
         <div className="container">  
-        
+
+            
+
             {estaCarregando ? (
                 // Exibe uma mensagem de carregamento enquanto os dados estão sendo buscados
                 <h1>Carregando ...</h1>

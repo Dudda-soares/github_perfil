@@ -13,4 +13,6 @@
 :root{
     --corPrincipal: rgba(255, 145, 0, 0.911);
     --corSecundaria: #111;
+    --corTerciaria: rgb(255, 102, 0);
+    --corBg: #fdd6b7c7;
 }
