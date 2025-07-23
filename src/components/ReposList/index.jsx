@@ -77,7 +77,7 @@ const ReposList = ({nomeUsuario }) => {
                                 <b >Linguagem:</b> 
                                 {language}
                             </div>
-                            <a className={styles.itemLink} target="_blank" href={html_url}> Vistar github</a>
+                            <a className={styles.itemLink} target="_blank" href={html_url}> Visitar github</a>
                         </li>
                     ))}
                 
